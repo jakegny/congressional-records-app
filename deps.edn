@@ -1,0 +1,26 @@
+{;; :paths ["target"]
+
+ :deps {org.clojure/clojurescript {:mvn/version "1.10.516"}
+        reagent {:mvn/version "0.8.1"}
+        cljs-http {:mvn/version "0.1.46"}
+        com.andrewmcveigh/cljs-time {:mvn/version "0.5.2"}
+        re-frame {:mvn/version "0.10.6"}
+        binaryage/devtools {:mvn/version "0.9.10"}
+        clj-commons/secretary {:mvn/version "1.2.4"}
+        day8.re-frame/http-fx {:mvn/version "0.1.6"}
+        re-com {:mvn/version "2.5.0"}}
+        ; day8.re-frame/tracing {:mvn/version "0.5.1"}}
+
+ :aliases
+ {:nrepl
+  {:extra-deps
+   {cider/cider-nrepl {:mvn/version "0.21.1"}
+    cider/piggieback {:mvn/version "0.4.0"}
+    clojure-complete {:mvn/version "0.2.5"}
+    com.bhauman/figwheel-main {:mvn/version "0.2.0"}
+    com.bhauman/rebel-readline {:mvn/version "0.1.4"}
+    com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
+    nrepl/nrepl {:mvn/version "0.6.0"}
+    proto-repl {:mvn/version "0.3.1"}}
+
+   :main-opts ["-m" "congressional-records-app.main"]}}}
