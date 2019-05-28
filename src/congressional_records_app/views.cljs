@@ -50,32 +50,32 @@
                        (dispatch [:delete-todo id]))
            :on-stop #(reset! editing false)}])])))
 
-; (defn task-list
-;   []
-;   (let [visible-todos @(subscribe [:visible-todos])
-;         all-complete? @(subscribe [:all-complete?])]
-;     [:section#main
-;      [:input#toggle-all
-;       {:type "checkbox"
-;        :checked all-complete?
-;        :on-change #(dispatch [:complete-all-toggle])}]
-;      [:label
-;       {:for "toggle-all"}
-;       "Mark all as complete"]
-;      [:ul#todo-list
-;       (for [todo  visible-todos]
-;         ^{:key (:id todo)} [todo-item todo])]]))
-
 (defn task-list
   []
   (let [visible-todos @(subscribe [:visible-todos])
         all-complete? @(subscribe [:all-complete?])]
-    [h-box
-     :gap "1px"
-     :children [[checkbox :model all-complete? :on-change #(dispatch [:complete-all-toggle])]
-                [:label
-                 {:for "toggle-all"}
-                 "Mark all as complete"]]]))
+    [:section#main
+     [:input#toggle-all
+      {:type "checkbox"
+       :checked all-complete?
+       :on-change #(dispatch [:complete-all-toggle])}]
+     [:label
+      {:for "toggle-all"}
+      "Mark all as complete"]
+     [:ul#todo-list
+      (for [todo  visible-todos]
+        ^{:key (:id todo)} [todo-item todo])]]))
+
+; (defn task-list
+;   []
+;   (let [visible-todos @(subscribe [:visible-todos])
+;         all-complete? @(subscribe [:all-complete?])]
+;     [h-box
+;      :gap "1px"
+;      :children [[checkbox :model all-complete? :on-change #(dispatch [:complete-all-toggle])]
+;                 [:label
+;                  {:for "toggle-all"}
+;                  "Mark all as complete"]]]))
 
 (defn fetch-data-btn
   []
@@ -87,6 +87,13 @@
      ; :disabled?         (= (:outcome-index @state) (dec (count click-outcomes)))
      :on-click          #(dispatch [:handler-with-http])]))
      ; :class             "btn-danger"]))
+
+(defn list-of-rep-names
+  []
+  (let [data @(subscribe [:fetched-data])]
+    [:ul#fetched-data
+     (for [item data]
+       ^{:key (:candidate_id item)} [:li (:name item)])]))
 
 (defn footer-controls
   []
@@ -125,5 +132,10 @@
       [task-list])
     [footer-controls]]
    [fetch-data-btn]
+   [list-of-rep-names]
    [:footer#info
     [:p "Double-click to edit a todo"]]])
+
+;; Must have reload
+(defn reload []
+  (js/console.log "Reload"))

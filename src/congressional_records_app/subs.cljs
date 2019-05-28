@@ -27,6 +27,11 @@
   (:todos db))
 (reg-sub :sorted-todos sorted-todos)    ;; usage: (subscribe [:sorted-todos])
 
+(reg-sub
+ :fetched-data
+ (fn [db _]
+   (:results (:good-http-result db))))
+
 ;; -------------------------------------------------------------------------------------
 ;; Layer 3
 ;;
@@ -161,3 +166,7 @@
  :<- [:completed-count]
  (fn [[todos completed] _]
    [(- (count todos) completed) completed]))
+
+;; Must have reload
+(defn reload []
+  (js/console.log "Reload"))

@@ -239,3 +239,7 @@
      (reduce #(assoc-in %1 [%2 :done] new-done)
              todos
              (keys todos)))))
+
+;; Must have reload
+(defn reload []
+  (js/console.log "Reload"))
